@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <main>
+    <div id="top-border">
+        <!-- <h1 id="Logga"><a href="index.html">STK</a></h1> -->
+        <nav id="nav-bar">
+            <a href="">Lätt läst</a>
+            <a href="">In English</a>
+            <a href="">Lyssna</a>
+            <a href="">Ändra Färg</a>
+        </nav>
+    </div>
+<h2 id="h2-1" class="h2-text">Statliga</h2>
+<h2 id="h2-2" class="h2-text">Televisionskanalen</h2>
+<div class="container">
+    <section id="forms-section">
+        <div class="form">
+            <form id="tvShows">
+                <h3>Lägg till program:</h3>
+                <label for="programTitel">Program Titel:</label>
+                <input type="text" name="program-titel" id="programTitel">
+                <label for="programDescription">Program beskrivning</label>
+                <input type="text" name="program-description" id="programDescription">
+                <label for="AgeLimit">Åldersgräns</label>
+                <input type="number" name="AgeLimit" id="ageLimit">
+                <label for="saveButton"></label>
+            <div id="knappDiv">
+                <button type="button" id="saveButton">SPARA</button>
+                <button type="button" id="showButton">VISA DATA</button>
+            </div>
+                <p id="dataCountText">Antal sparade objekt: <span id="dataCount">0</span></p>
+            </form>
+        </div>
+            <form id="search-form">
+            <label for="search-input">Search: </label>
+            <input type="text" id="search-input"/>
+            <div id="buttonContainer">
+                <button type="button" id="searchButton" onclick="searchData(event)">SÖK</button>
+                <button type="button" id="deleteButton" onclick="clearStorage(event)">RADERA</button>
+            </div>
+            </form>  
+        <table id="search-results" class="alert" >
+        <tr>
+        <th>Program-titel:</th>
+        <th>Beskrivning:</th>
+        <th>Åldersgräns:</th>
+        </tr>
+        </table>
+    </section>
+</div>
+</main>
+<script src="scripts/scripts.js"></script>
+</body>
+</html>

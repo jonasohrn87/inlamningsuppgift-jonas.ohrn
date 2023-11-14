@@ -1,0 +1,241 @@
+$primaryColor: rgb(13, 13, 40);
+$secondaryColor: white;
+$blueischColor: #349bab;
+$khakiColor: khaki;
+@mixin addDropShadow(){
+    filter:drop-shadow(1px 1px 10px black)
+    drop-shadow(-1px -1px 0 black);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    background: $blueischColor;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    // background: linear-gradient(to right, rgba(13,13,40,1), rgba(255,0,0,1));;
+    background: $blueischColor;
+    height: 100vh;
+    justify-content: center; /* Centrera på vertikal axel */
+    align-items: center; /* Centrera på horisontell axel */
+
+    #top-border {
+        display: flex;
+        background: $khakiColor;
+        height: 2.5rem;
+        @include addDropShadow();
+
+        
+        #nav-bar{
+            display: flex;
+            padding-right: 4rem;
+            margin: 0 -1em;
+        }
+    }
+}
+
+#nav-bar a {
+    flex-wrap: nowrap;
+    font-size:clamp(10px, 5px + 10vw, 25px); 
+    color: black;
+    margin-left: 2rem;
+    position: relative;
+    text-decoration: none;
+    // border: solid;
+}
+
+
+
+#nav-bar a::before{
+    content:"";
+    background-color: $blueischColor;
+    width: 0;
+    height: 2.4px;
+    position: absolute;
+    bottom: -5px;
+    left: 0px;
+    transition: width 0.6s;
+}
+
+#nav-bar a:hover::before{
+   width: 100%;
+}
+
+#nav-bar a:hover{
+    text-decoration: none;
+    color: #349bab;
+}
+
+h2{
+    font-size:clamp(50px,10px + 10vw, 150px);
+    color: $secondaryColor;
+    @include addDropShadow();
+
+}
+
+#h2-2{
+    background: linear-gradient(to left, rgba(13,13,40,1), rgba(255,0,0,1));;
+    @include addDropShadow();
+    
+}
+.container{
+    display: flex;
+    margin-top: 1em;
+
+section{
+    display: flex;
+    height: 360px;
+    width: 873px;
+    background: $blueischColor;
+    @include addDropShadow();
+
+    #search-form{
+        height: 10em;
+    }
+
+    }
+}
+form{
+    display: flex;
+    flex-direction: column;
+    border: solid black ;    
+    background-color: $khakiColor;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 15em;
+    height: 20em;
+    margin: 1em;
+    
+    h3,
+    label {
+        text-transform: uppercase;
+    }
+    label {
+        margin: 1rem 0 0;
+    }
+    input{
+        font-size: 1.4em;
+        display: block;
+    }
+    button{
+        background-color: #349bab;
+        width: calc((100%/2) - 3px);
+        display: inline-block;
+        color:  $secondaryColor;
+        font-weight: 600;
+        height: 2.8rem;
+        border: none;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 1rem;
+        cursor: pointer;
+        outline: none
+    }
+    
+    button:focus,
+    textarea:focus{
+        outline: $blueischColor solid 1px;
+    }
+    button:hover{
+       background: #50747c;
+    }
+
+    #knappDiv{
+        display: flex;
+        justify-content: space-around;
+    }
+
+    #dataCountText{
+        padding-left: 2.3em;
+        padding-top: 0.8em;
+    }
+
+    #buttonContainer{
+        display: flex;
+        justify-content: space-around;
+    }
+}
+#search-form button{
+    margin: 20px 10px 30px;
+}
+
+.notification {
+    position: fixed;
+    background-color: #349bab; 
+    color: $secondaryColor;
+    padding: 10px;
+    border: solid black 1px;
+    border-radius: 5px;
+    z-index: 999; /* Se till att notifikationen visas över andra element */
+}
+
+table{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid black ;
+    background-color: $khakiColor;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 18em;
+    height: 20.3em;
+    margin-top: 1rem;
+    margin-left: 1em;
+
+    th{
+        border-bottom: black solid ;
+        padding-right: 10px;
+    }
+
+}
+
+#search-results .dynamic-row {
+    /* Här kan du lägga till stil för de dynamiskt skapade raderna */
+    /* Till exempel: */
+    flex-direction: row;
+    border-bottom: solid 1px black; /* Lägg till en kant runt raderna */
+    
+    #search-results .dynamic-row td {
+        border: solid 10px red; /* Lägg till styling för cellerna */
+        padding: 5px; /* Exempel på ytterligare styling */
+    }
+    
+}
+
+@media (max-width:529px) {
+
+    #top-border{
+        margin-top: -8.2em;
+        width: 100%;
+        align-items: center;
+        font-size: 1em;
+    }
+    #nav-bar{
+        
+
+        a{
+            font-size: 1.15em;
+            left: 2em;
+        }
+
+    }
+
+}
+.h2-text{
+        font-size: 3.5em;
+    }
+
+    @media (max-width:860px) {
+        
+        #forms-section{
+            align-items: center;
+            flex-direction: column;
+            
+        }
+    section{
+        
+    }
+    }
