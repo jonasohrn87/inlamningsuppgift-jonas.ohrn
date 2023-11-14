@@ -69,7 +69,6 @@ h2 {
 }
 
 .container {
-  display: flex;
   margin-top: 1em;
 }
 .container section {
@@ -158,10 +157,17 @@ table {
   border: solid black;
   background-color: khaki;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  width: 18em;
+  width: 20em;
   height: 20.3em;
   margin-top: 1rem;
-  margin-left: 1em;
+  margin-right: 1em;
+}
+table td {
+  border: black solid 3px;
+  padding: 1em;
+  width: 5em;
+  flex-grow: 1;
+  word-break: break-all;
 }
 table th {
   border-bottom: black solid;
@@ -172,7 +178,6 @@ table th {
   /* Här kan du lägga till stil för de dynamiskt skapade raderna */
   /* Till exempel: */
   flex-direction: row;
-  border-bottom: solid 1px black; /* Lägg till en kant runt raderna */
 }
 #search-results .dynamic-row #search-results .dynamic-row td {
   border: solid 10px red; /* Lägg till styling för cellerna */
@@ -191,10 +196,6 @@ table th {
     left: 2em;
   }
 }
-.h2-text {
-  font-size: 3.5em;
-}
-
 @media (max-width: 860px) {
   #forms-section {
     align-items: center;

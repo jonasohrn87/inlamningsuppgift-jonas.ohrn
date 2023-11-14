@@ -152,6 +152,15 @@ function searchData() {
 
     searchResults.innerHTML = '';
 
+    if (parsedData.length > 0) {
+        // Add titles first
+        const titleRow = searchResults.appendChild(document.createElement('tr'));
+        const titles = ['Program-titel:','Beskrivning','Åldersgräns'];
+        for (let title of titles) {
+            const titleCell = titleRow.appendChild(document.createElement('th'));
+            titleCell.innerHTML = title;
+        }
+    }
     for (let index = 0; index < parsedData.length; index++) {
         if (parsedData[index][0] === searchInput) {  // Använd parsedData[index][0] för titeln
             const insertRow = document.createElement('tr');  // Skapa en ny rad
