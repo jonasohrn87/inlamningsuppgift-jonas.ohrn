@@ -194,17 +194,17 @@ function searchData() {
     }
 
     if (searchResults.children.length === 0) {
-        // Om ingen matchning hittades, lägg till ett meddelande i tabellen
+        // Om ingen matchning hittades, läggs ett meddelande i tabellen
         const noResultsRow = document.createElement('tr');
         const noResultsCell = document.createElement('td');
-        noResultsCell.colSpan = 3;  // Sätt colSpan för att täcka alla tre kolumnerna
+        noResultsCell.colSpan = 3;  // colSpan för att täcka alla tre kolumnerna
         noResultsCell.innerHTML = 'Inga matchande resultat hittades.';
         noResultsRow.appendChild(noResultsCell);
         searchResults.appendChild(noResultsRow);
     }
 }
 
-// Objekt som innehåller översättningar
+// Objekt som innehåller översättningarna
 const translations = {
     'easyRead': {
         'sv': 'Lätt läst',
@@ -293,12 +293,12 @@ function changeLanguage(event) {
             element.innerText = translations[key][lang];
         }
     });
-     // Byt språkkoden
+     
      const newLang = lang === 'en' ? 'sv' : 'en';
      event.target.setAttribute('data-lang', newLang);
 }
 
-// Lägg till data-lang-attribut för att hålla språkkoden
+
 document.getElementById('inEnglish').setAttribute('data-lang', 'en');
 document.getElementById('inEnglish').addEventListener('click', changeLanguage);
 
@@ -310,13 +310,13 @@ function speakText(event) {
 
     elements.forEach(element => {
         const key = element.getAttribute('data-translate');
-        const translation = translationManager.getTranslation(key, 'sv'); // Anpassa för önskat språk
+        const translation = translationManager.getTranslation(key, 'sv');
         textToSpeak += translation + ' ';
     });
 
     if ('speechSynthesis' in window) {
         const speech = new SpeechSynthesisUtterance(textToSpeak);
-        speech.lang = 'sv-SE'; // Anpassa för önskat språk
+        speech.lang = 'sv-SE';
         speech.volume = 1;
         speech.rate = 0.8;
         speech.pitch = 1;
@@ -326,7 +326,7 @@ function speakText(event) {
         console.error('Web Speech API stöds inte i den här webbläsaren.');
     }
 }
-// Anropa speakText-funktionen vid behov, t.ex. när en knapp klickas
+// Anropa speakText-funktionen när man klickar
 document.getElementById('listen').addEventListener('click', speakText);
 
 let isTrue = true;
@@ -346,10 +346,11 @@ function changeTextSize(event) {
         }
     });
 
-    isTrue = !isTrue; // Flytta detta inuti funktionen så att det byter värde varje gång funktionen körs
+    isTrue = !isTrue; 
 }
 easyReadButton.addEventListener('click', changeTextSize);
 
+//funktion att ändra bakgrundsfärg
 let colorChangeOrNot = true;
 const changeColorButton = document.getElementById('changeCol');
 
