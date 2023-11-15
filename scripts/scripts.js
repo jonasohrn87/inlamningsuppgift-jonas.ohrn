@@ -78,7 +78,7 @@ function showData(event) {
             searchResults.innerHTML = ''; // Tömmer tidigare resultat
 
             if (parsedData.length > 0) {
-                // Add titles first
+                //Lägg till Titel, beskrivning och åldersgräns som rubrik 
                 const titleRow = searchResults.appendChild(document.createElement('tr'));
                 const titles = ['Program-titel:','Beskrivning','Åldersgräns'];
                 for (let title of titles) {
@@ -86,7 +86,7 @@ function showData(event) {
                     titleCell.innerHTML = title;
                 }
 
-                // Then add data
+                //Skriv ut den sparade datan
                 for (let index = 0; index < parsedData.length; index++) {
                     let row = searchResults.appendChild(document.createElement('tr'));
 
