@@ -101,9 +101,9 @@ function showData(event) {
                 for (let index = 0; index < parsedData.length; index++) {
                     let row = searchResults.appendChild(document.createElement('tr'));
 
-                    for (let y = 0; y < 3; y++) {
+                    for (let key = 0; key < 3; key++) {
                         let data = row.appendChild(document.createElement('td'));
-                        data.innerHTML = parsedData[index][y];
+                        data.innerHTML = parsedData[index][key];
                     }
                 }
             } else { //Skriver ut meddelande om det inte finns någon sparad data.
@@ -172,9 +172,9 @@ function searchData() {
     for (let index = 0; index < parsedData.length; index++) {
         if (parsedData[index][0] === searchInput) {  // Använd parsedData[index][0] för titeln
             const insertRow = document.createElement('tr');  // Skapa en ny rad
-            for (let y = 0; y < 3; y++) {
+            for (let key = 0; key < 3; key++) {
                 const cell = document.createElement('td');  // Skapa en ny cell
-                cell.innerHTML = parsedData[index][y];  // Fyll cellen med data från local storage
+                cell.innerHTML = parsedData[index][key];  // Fyll cellen med data från local storage
                 insertRow.appendChild(cell);  // Lägg till cellen i raden
             }
             searchResults.appendChild(insertRow);  // Lägg till den nya raden i tabellen
@@ -191,3 +191,39 @@ function searchData() {
         searchResults.appendChild(noResultsRow);
     }
 }
+
+// Objekt som innehåller översättningar
+const translations = {
+    'easyRead': {
+        'sv': 'Lätt läst',
+        'en': 'Easy-to-read',
+    },
+    'inEnglish':{
+        'sv': 'In English',
+        'en': 'På Svenska',
+    },
+   'listen':{
+        'sv': 'Lyssna',
+        'en': 'Listen',
+    },   
+};
+
+// Funktion för att ändra språk
+function changeLanguage(event) {
+    event.preventDefault()
+    const lang = event.target.getAttribute('data-lang');
+    const elements = document.querySelectorAll('[data-translate]');
+    elements.forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (translations[key] && translations[key][lang]) {
+            element.innerText = translations[key][lang];
+        }
+    });
+     // Byt språkkoden
+     const newLang = lang === 'en' ? 'sv' : 'en';
+     event.target.setAttribute('data-lang', newLang);
+}
+
+// Lägg till data-lang-attribut för att hålla språkkoden
+document.getElementById('inEnglish').setAttribute('data-lang', 'en');
+document.getElementById('inEnglish').addEventListener('click', changeLanguage);
