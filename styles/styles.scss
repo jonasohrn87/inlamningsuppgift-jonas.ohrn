@@ -2,9 +2,17 @@ $primaryColor: rgb(13, 13, 40);
 $secondaryColor: white;
 $blueischColor: #349bab;
 $khakiColor: khaki;
+$fontStile:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
 @mixin addDropShadow(){
     filter:drop-shadow(1px 1px 10px black)
     drop-shadow(-1px -1px 0 black);
+
+@mixin addFlexboxAndJusifyContent(){
+    display: flex;
+    justify-content: space-around;
+}
+
 }
 
 *{
@@ -19,7 +27,6 @@ html{
 main{
     display: flex;
     flex-direction: column;
-    // background: linear-gradient(to right, rgba(13,13,40,1), rgba(255,0,0,1));;
     background: $blueischColor;
     height: 100vh;
     justify-content: center; /* Centrera på vertikal axel */
@@ -106,7 +113,7 @@ form{
     flex-direction: column;
     border: solid black ;    
     background-color: $khakiColor;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: $fontStile;
     width: 15em;
     height: 20em;
     margin: 1em;
@@ -130,7 +137,7 @@ form{
         font-weight: 600;
         height: 2.8rem;
         border: none;
-        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-family: $fontStile;
         font-size: 1rem;
         cursor: pointer;
         outline: none
@@ -145,8 +152,7 @@ form{
     }
 
     #knappDiv{
-        display: flex;
-        justify-content: space-around;
+        @include addFlexboxAndJusifyContent();
     }
 
     #dataCountText{
@@ -155,8 +161,7 @@ form{
     }
 
     #buttonContainer{
-        display: flex;
-        justify-content: space-around;
+        @include addFlexboxAndJusifyContent();
     }
 }
 #search-form button{
@@ -179,7 +184,7 @@ table{
     align-items: center;
     border: solid black ;
     background-color: $khakiColor;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: $fontStile;
     width: 20em;
     height: 20.3em;
     margin-top: 1rem;
@@ -196,19 +201,6 @@ table{
     th{
         border-bottom: black solid ;
         padding-right: 10px;
-    }
-    
-}
-
-#search-results .dynamic-row {
-    /* Här kan du lägga till stil för de dynamiskt skapade raderna */
-    /* Till exempel: */
-    flex-direction: row;
-    // border-bottom: solid 1px black; /* Lägg till en kant runt raderna */
-    
-    #search-results .dynamic-row td {
-        border: solid 10px red; /* Lägg till styling för cellerna */
-        padding: 5px; /* Exempel på ytterligare styling */
     }
     
 }

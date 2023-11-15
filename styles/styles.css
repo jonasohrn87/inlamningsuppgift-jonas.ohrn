@@ -174,16 +174,6 @@ table th {
   padding-right: 10px;
 }
 
-#search-results .dynamic-row {
-  /* Här kan du lägga till stil för de dynamiskt skapade raderna */
-  /* Till exempel: */
-  flex-direction: row;
-}
-#search-results .dynamic-row #search-results .dynamic-row td {
-  border: solid 10px red; /* Lägg till styling för cellerna */
-  padding: 5px; /* Exempel på ytterligare styling */
-}
-
 @media (max-width: 529px) {
   #top-border {
     margin-top: -8.2em;

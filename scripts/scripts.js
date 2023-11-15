@@ -1,51 +1,62 @@
-var dataCountSpan = document.getElementById('dataCount');
-var dataCountText = document.getElementById('dataCountText');
-
-function DisplayMessage(message, mouseX, mouseY){
+//Funktion för meddelande om när man klickat på data om vad som hänt.
+function DisplayMessage(message, mouseX, mouseY){ //deklarerar tre variabler direkt i skapandet av funktionen.
 
     const notification = document.createElement('div');
     notification.innerHTML = message;
     notification.classList.add('notification');
 
+    //Sätter positionen för meddelandet på musens position, med en liten föskjutning.
     notification.style.left = (mouseX + 10) + 'px';
     notification.style.top = (mouseY + 10) + 'px';
 
+    //Lägger till nytt element i taggen <body>
     document.body.appendChild(notification);
 
+    //Funktion för hur länge meddelandet ska synas innan det försvinner.
     setTimeout(() => {
     document.body.removeChild(notification);
     console.log('Notification removed');
     }, 1500);
 }
 
-function saveData(event) {
 
-    const programTitel = document.getElementById("programTitel").value;
+//variabler till funktionen som räknar antal sparad data. 
+var dataCountSpan = document.getElementById('dataCount');
+var dataCountText = document.getElementById('dataCountText');
+
+function saveData(event) {
+    //Hämtar värden inne i html dokumentet från specifika id-element.
+    const programTitel = document.getElementById("programTitel").value; 
     const programDescription = document.getElementById("programDescription").value;
     const ageLimit = document.getElementById("ageLimit").value;
 
-    // Lagra muspekarens position för notikations-meddelandet.
+    // Lagra muspekarens position för funktionen "DisplayMessage".
     const mouseX = event.clientX || 0;
     const mouseY = event.clientY || 0;
 
-    // Kontrollera om något av fälten är tomt
+    // Kontrollera om något av fälten är tomt, skicka meddelande om så är fallet.
     if (!programTitel || !programDescription || !ageLimit) {
         DisplayMessage("Alla fällt är ej ifyllda!", mouseX, mouseY);
         return; // Avbryt funktionen om något fält är tomt
     }
-
+    //Skapat ett object där siffrorna i det här fallet och dess värde kommer efteråt.
     let tvShowAdded = {
         0 : programTitel,
         1 : programDescription,
         2 : ageLimit,
     };
 
-    let existingData = localStorage.getItem('tvShows');
-    existingData = existingData ? JSON.parse(existingData) : [];
-
+    let existingData = localStorage.getItem('tvShows'); //hämtar data som är sparad lokalt.
+    // Här utvärderas "existingData" om den innehåller någon data, 
+    // om så är fallet omvandlas JSON-strängen till ett objekt eller array, 
+    // Om det inte finns någon data skapas en tom array.
+    existingData = existingData ? JSON.parse(existingData) : []; 
+    // Här utökas existingData med en ny TV-show
+    // och sparar den uppdaterade datan till den lokala lagringen.
     existingData.push(tvShowAdded);
     localStorage.setItem('tvShows', JSON.stringify(existingData));
 
+    //Nollställer formulärs fälten i html dokumentet.
     document.getElementById('programTitel').value = '';
     document.getElementById('programDescription').value = '';
     document.getElementById('ageLimit').value = '';
@@ -57,10 +68,10 @@ function saveData(event) {
     // Uppdatera texten med antalet objekt
     dataCountText.textContent = 'Antal sparade objekt: ' + storedData.length;
 
-
+    // Visar meddelande om att det sparats ett program.
     DisplayMessage("Tv-program sparat", mouseX, mouseY);
 }
-
+// Skapar ett event som lyssnar efter att användaren klickar med musen och kallar på funktion.
 document.getElementById('saveButton').addEventListener('click', saveData);
 const searchResults = document.getElementById('search-results').firstElementChild;
 
@@ -73,12 +84,12 @@ function showData(event) {
     const searchResults = document.getElementById('search-results');
 
     if (savedData) {
-        try {
+        try { //Try/catch som kollars det ifall JSON filen finns eller är giltig. Annars får vi ett felmeddelande.
             const parsedData = JSON.parse(savedData);
             searchResults.innerHTML = ''; // Tömmer tidigare resultat
 
             if (parsedData.length > 0) {
-                //Lägg till Titel, beskrivning och åldersgräns som rubrik 
+                //Lägg till Titel, beskrivning och åldersgräns som rubrik.
                 const titleRow = searchResults.appendChild(document.createElement('tr'));
                 const titles = ['Program-titel:','Beskrivning','Åldersgräns'];
                 for (let title of titles) {
@@ -86,19 +97,16 @@ function showData(event) {
                     titleCell.innerHTML = title;
                 }
 
-                //Skriv ut den sparade datan
+                //Skriv ut den sparade datan. Skapar table-row med
                 for (let index = 0; index < parsedData.length; index++) {
                     let row = searchResults.appendChild(document.createElement('tr'));
-
-                    // Lägg till klassen 'dynamic-row' till de dynamiskt skapade raderna
-                    row.classList.add('dynamic-row');
 
                     for (let y = 0; y < 3; y++) {
                         let data = row.appendChild(document.createElement('td'));
                         data.innerHTML = parsedData[index][y];
                     }
                 }
-            } else {
+            } else { //Skriver ut meddelande om det inte finns någon sparad data.
                 searchResults.innerHTML = '<tr><td colspan="3">Ingen lagrad data hittad</td></tr>';
                 DisplayMessage("Ingen lagrad data hittad!", mouseX, mouseY);
             }
@@ -106,12 +114,12 @@ function showData(event) {
             console.error('Error parsing JSON:', error);
             alert('Ogiltig JSON-data i local storage');
         }
-    } else {
+    } else { //Skriver ut meddelande om det inte finns någon sparad data.
         searchResults.innerHTML = '<tr><td colspan="3">Ingen lagrad data hittad</td></tr>';
         DisplayMessage("Ingen lagrad data hittad!", mouseX, mouseY);
     }
 }
-
+// Skapar ett event som lyssnar efter att användaren klickar med musen och kallar på funktion.
 document.getElementById('showButton').addEventListener('click', showData);
 
 
@@ -129,7 +137,7 @@ function clearStorage(event) {
     dataCountSpan.textContent = storedData.length;
     dataCountText.textContent = 'Antal sparade objekt: ' + storedData.length;
 }
-
+// Skapar ett event som lyssnar efter att användaren klickar med musen och kallar på funktion.
 document.getElementById('deleteButton').addEventListener('click', clearStorage);
 
 // Kod som körs när sidan har laddats
@@ -153,7 +161,7 @@ function searchData() {
     searchResults.innerHTML = '';
 
     if (parsedData.length > 0) {
-        // Add titles first
+        //Lägg till Titel, beskrivning och åldersgräns som rubrik.
         const titleRow = searchResults.appendChild(document.createElement('tr'));
         const titles = ['Program-titel:','Beskrivning','Åldersgräns'];
         for (let title of titles) {
