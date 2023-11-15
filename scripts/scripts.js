@@ -1,3 +1,15 @@
+// Skapa ett translationManager-objekt
+const translationManager = {
+    getTranslation: function (key, lang) {
+        if (translations[key] && translations[key][lang]) {
+            return translations[key][lang];
+        } else {
+            return key; // Returnera nyckeln om översättningen inte finns
+        }
+    }
+};
+
+
 //Funktion för meddelande om när man klickat på data om vad som hänt.
 function DisplayMessage(message, mouseX, mouseY){ //deklarerar tre variabler direkt i skapandet av funktionen.
 
@@ -206,11 +218,73 @@ const translations = {
         'sv': 'Lyssna',
         'en': 'Listen',
     },   
+    'changeCol':{
+        'sv': 'Ändra Färg',
+        'en': 'Change Color',
+    },   
+    'addProg':{
+        'sv': 'Lägg till program:',
+        'en': 'Add tv-show:',
+    },   
+    'showTitel':{
+        'sv': 'Program Titel:',
+        'en': 'Tv-show Title:',
+    },   
+    'description':{
+        'sv': 'Program beskrivning:',
+        'en': 'Description:',
+    },   
+    'ageLim':{
+        'sv': 'Åldersgräns:',
+        'en': 'Age restriction:',
+    },   
+    'saveButton':{
+        'sv': 'SPARA',
+        'en': 'SAVE',
+    },   
+    'showButton':{
+        'sv': 'Visa DATA',
+        'en': 'SHOW DATA',
+    },   
+    'dataCountText':{
+        'sv': 'Antal sparade objekt:',
+        'en': 'Amount data saved:',
+    },   
+    'search':{
+        'sv': 'Sök:',
+        'en': 'SEARCH:',
+    },   
+    'searchButton':{
+        'sv': 'SÖK',
+        'en': 'SEARCH',
+    },   
+    'deleteButton':{
+        'sv': 'RADERA',
+        'en': 'DELETE',
+    },   
+    'lastUpdate':{
+        'sv': 'Sidan uppdaterades: 2023-11-16',
+        'en': 'Page updated: 2023-11-16',
+    },   
+    'titleShow':{
+        'sv': 'Program-titel:',
+        'en': 'Program-Title:',
+    },   
+    'descriptionShow':{
+        'sv': 'Beskrivning:',
+        'en': 'Description',
+    },   
+    'limitAge':{
+        'sv': 'Åldersgräns:',
+        'en': 'Age Restriction:',
+    },   
+    
+
 };
 
 // Funktion för att ändra språk
 function changeLanguage(event) {
-    event.preventDefault()
+    event.preventDefault();
     const lang = event.target.getAttribute('data-lang');
     const elements = document.querySelectorAll('[data-translate]');
     elements.forEach(element => {
@@ -227,3 +301,72 @@ function changeLanguage(event) {
 // Lägg till data-lang-attribut för att hålla språkkoden
 document.getElementById('inEnglish').setAttribute('data-lang', 'en');
 document.getElementById('inEnglish').addEventListener('click', changeLanguage);
+
+// Funktion för att läsa upp text
+function speakText(event) {
+    event.preventDefault();
+    const elements = document.querySelectorAll('[data-translate]');
+    let textToSpeak = '';
+
+    elements.forEach(element => {
+        const key = element.getAttribute('data-translate');
+        const translation = translationManager.getTranslation(key, 'sv'); // Anpassa för önskat språk
+        textToSpeak += translation + ' ';
+    });
+
+    if ('speechSynthesis' in window) {
+        const speech = new SpeechSynthesisUtterance(textToSpeak);
+        speech.lang = 'sv-SE'; // Anpassa för önskat språk
+        speech.volume = 1;
+        speech.rate = 0.8;
+        speech.pitch = 1;
+
+        window.speechSynthesis.speak(speech);
+    } else {
+        console.error('Web Speech API stöds inte i den här webbläsaren.');
+    }
+}
+// Anropa speakText-funktionen vid behov, t.ex. när en knapp klickas
+document.getElementById('listen').addEventListener('click', speakText);
+
+let isTrue = true;
+const easyReadButton = document.getElementById('easyRead');
+function changeTextSize(event) {
+    event.preventDefault();
+
+    var textFrånKlass = document.querySelectorAll('.changeTextSize');
+
+    textFrånKlass.forEach(function (element) {
+        console.log(element.innerText);
+
+        if (isTrue) {
+            element.style.fontSize = '200%';
+        } else {
+            element.style.fontSize = '156%';
+        }
+    });
+
+    isTrue = !isTrue; // Flytta detta inuti funktionen så att det byter värde varje gång funktionen körs
+}
+easyReadButton.addEventListener('click', changeTextSize);
+
+let colorChangeOrNot = true;
+const changeColorButton = document.getElementById('changeCol');
+
+function changeBackgroundCol(event) {
+    event.preventDefault();
+
+    var classColorChange = document.querySelectorAll('main');
+
+    classColorChange.forEach(function (element) {
+        if (colorChangeOrNot) {
+            element.style.background = 'black';
+        } else {
+            element.style.background = '#349bab';
+        }
+    });
+
+    colorChangeOrNot = !colorChangeOrNot;
+}
+
+changeColorButton.addEventListener('click', changeBackgroundCol);

@@ -11,10 +11,10 @@
     <main>
     <div id="top-border">
         <nav id="nav-bar">
-            <a href="" id="easyRead" data-translate="easyRead">Lätt läst</a>
-            <a href="" id="inEnglish">In English</a>
-            <a href="" id="listen">Lyssna</a>
-            <a href="index.html">Ändra Färg</a>
+            <a href="" class="changeTextSize" id="easyRead" data-translate="easyRead">Lätt läst</a>
+            <a href="" class="changeTextSize" id="inEnglish"data-translate="inEnglish">In English</a>
+            <a href="" class="changeTextSize" id="listen"data-translate="listen">Lyssna</a>
+            <a href="" class="changeTextSize" id="changeCol" data-translate="changeCol">Ändra Färg</a>
         </nav>
     </div>
 <h2 id="h2-1" class="h2-text">Statliga</h2>
@@ -23,37 +23,37 @@
     <section id="forms-section">
         <div class="form">
             <form id="tvShows">
-                <h3>Lägg till program:</h3>
-                <label for="programTitel">Program Titel:</label>
+                <h3 id="addProg"data-translate="addProg">Lägg till program:</h3>
+                <label id="showTitel" for="programTitel"data-translate="showTitel">Program Titel:</label>
                 <input type="text" name="program-titel" id="programTitel">
-                <label for="programDescription">Program beskrivning</label>
+                <label id="description" for="programDescription"data-translate="description">Program beskrivning:</label>
                 <input type="text" name="program-description" id="programDescription">
-                <label for="AgeLimit">Åldersgräns</label>
+                <label id="ageLim" for="AgeLimit"data-translate="ageLim">Åldersgräns:</label>
                 <input type="number" name="AgeLimit" id="ageLimit">
                 <label for="saveButton"></label>
             <div id="knappDiv">
-                <button type="button" id="saveButton">SPARA</button>
-                <button type="button" id="showButton">VISA DATA</button>
+                <button type="button" id="saveButton"data-translate="saveButton">SPARA</button>
+                <button type="button" id="showButton"data-translate="showButton">VISA DATA</button>
             </div>
                 <p id="dataCountText">Antal sparade objekt: <span id="dataCount">0</span></p>
             </form>
         </div>
             <form id="search-form">
-                <label for="search-input">Search: </label>
+                <label id="search" for="search-input"data-translate="search">Sök: </label>
                 <input type="text" id="search-input"/>
                     <div id="buttonContainer">
-                        <button type="button" id="searchButton" onclick="searchData(event)">SÖK</button>
-                        <button type="button" id="deleteButton" onclick="clearStorage(event)">RADERA</button>
+                        <button type="button" id="searchButton" onclick="searchData(event)"data-translate="searchButton">SÖK</button>
+                        <button type="button" id="deleteButton" onclick="clearStorage(event)"data-translate="deleteButton">RADERA</button>
                     </div>
                 <footer>
-                <p id="lastUpdate">Sidan uppdaterades: 2023-11-16</p>
+                <p id="lastUpdate"data-translate="lastUpdate">Sidan uppdaterades: 2023-11-16</p>
                 </footer>
             </form>  
         <table id="search-results" class="alert" >
         <tr>
-        <th>Program-titel:</th>
-        <th>Beskrivning:</th>
-        <th>Åldersgräns:</th>
+        <th id="titleShow"data-translate="titleShow">Program-titel:</th>
+        <th id="descriptionShow"data-translate="descriptionShow">Beskrivning:</th>
+        <th id="limitAge"data-translate="limitAge">Åldersgräns:</th>
         </tr>
         </table>
          
